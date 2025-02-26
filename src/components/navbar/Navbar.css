@@ -1,0 +1,62 @@
+/* Navbar.css */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #343a40;
+    padding: 10px 40px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    /* Soft shadow for depth */
+}
+
+.navbar .logo {
+    font-size: 32px;
+    /* Larger font size for prominence */
+    font-weight: 800;
+    /* Bold font weight for impact */
+    color: #ffffff;
+    /* Default white color for the logo */
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background-image: none;
+    /* Remove gradient background */
+    color: #ffffff;
+    /* Set text color to white */
+    transition: none;
+    /* Remove any transition for background and scale */
+    cursor: default;
+    /* Remove the link cursor */
+}
+
+.navbar .logo span {
+    pointer-events: none;
+    /* Prevent text from being clicked */
+}
+
+.navbar .logo:hover {
+    transform: none;
+    /* Remove scale effect on hover */
+    background-position: none;
+    /* Remove background animation */
+    color: #ffffff;
+    /* Keep the logo color white */
+}
+
+.navbar-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+.navbar-link {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.navbar-link:hover {
+    color: #00c6ff;
+    /* Hover color change for links */
+}

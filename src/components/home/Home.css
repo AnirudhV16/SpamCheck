@@ -1,0 +1,113 @@
+/* HomePage.css */
+.homepage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    background-color: #f4f7fc;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    /* Smooth font for better readability */
+}
+
+.hero-section {
+    max-width: 90%;
+    min-width: 45%;
+    /* Increased the max-width to make it wider */
+    /*min-height: 80vh;*/
+    /* Increased height for a taller section */
+    padding: 60px 40px;
+    /* Increased padding for more space inside */
+    background: linear-gradient(135deg, #007bff, #00c6ff);
+    /* Beautiful gradient background */
+    color: white;
+    border-radius: 16px;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+}
+
+/* Hero section hover effect */
+/*.hero-section:hover {
+    transform: translateY(-5px);
+}*/
+
+.hero-section h1 {
+    font-size: 64px;
+    /* Increased font size for larger impact */
+    font-weight: 800;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+}
+
+.hero-section p {
+    font-size: 20px;
+    /* Increased font size for better readability */
+    font-weight: 300;
+    margin-top: 15px;
+    line-height: 1.6;
+    /* More spacing between lines */
+    max-width: 800px;
+    /* Ensures the paragraph doesn't stretch too wide */
+}
+
+.cta {
+    display: flex;
+    justify-content: center;
+    gap: 35px;
+    /* Increased gap between buttons */
+    margin-top: 40px;
+}
+
+.cta-button {
+    padding: 18px 45px;
+    /* Increased button padding */
+    background-color: #ffffff;
+    color: #007bff;
+    font-size: 22px;
+    /* Increased font size for better readability */
+    font-weight: bold;
+    border: 2px solid #007bff;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Hover effect for buttons */
+.cta-button:hover {
+    background-color: #007bff;
+    color: white;
+    transform: translateY(-3px);
+}
+
+/* Responsive Design for smaller screens */
+@media (max-width: 768px) {
+    .hero-section {
+        max-width: 95%;
+        /* Reduce max-width on smaller screens */
+        padding: 40px 20px;
+        /* Adjust padding for smaller screens */
+    }
+
+    .hero-section h1 {
+        font-size: 48px;
+        /* Adjust font size for smaller screens */
+    }
+
+    .hero-section p {
+        font-size: 20px;
+        /* Adjust paragraph font size for readability */
+    }
+
+    .cta-button {
+        padding: 14px 35px;
+        /* Smaller button padding on mobile */
+        font-size: 18px;
+        /* Smaller button font size */
+    }
+}
