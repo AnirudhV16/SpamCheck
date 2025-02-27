@@ -26,7 +26,7 @@ const Bulkk = () => {
     try {
       setError(null);
       const response = await axios.post(
-        "http://railback-production.up.railway.app/ml_api/bulkclassify/",
+        "https://railback-production.up.railway.app/ml_api/bulkclassify/",
         formData,
         {
           headers: {

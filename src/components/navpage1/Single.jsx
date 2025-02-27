@@ -17,7 +17,7 @@ const Single = () => {
 
     try {
       const response = await fetch(
-        "http://railback-production.up.railway.app/ml_api/classify/",
+        "https://railback-production.up.railway.app/ml_api/classify/",
         {
           method: "POST",
           headers: {
