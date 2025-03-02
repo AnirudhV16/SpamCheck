@@ -1,0 +1,6 @@
+services:
+  - name: django-backend
+    type: web
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn your_project.wsgi --bind 0.0.0.0:$PORT
