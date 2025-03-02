@@ -69,6 +69,7 @@ const Single = () => {
             <option value="bilstm">BiLSTM</option>
             <option value="rl">Reinforcement Learning</option>
             <option value="pu">PU Learning</option>
+            <option value="gan">GAN BERT model</option>
             <option value="ensemble">Ensemble Model</option>
           </select>
 
