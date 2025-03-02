@@ -106,7 +106,15 @@ def bulk_classify(request):
             }
             ensemble_results = [{"sms": sms, "ensemble": "SPAM" if prob >= 0.5 else "NOT SPAM"} for sms, prob in zip(smses, ensemble_final_probs)]
 
-            return JsonResponse({"models": model_results, "ensemble": {"table": ensemble_results, "metrics": ensemble_metrics, "chart": generate_bar_chart(ensemble_metrics, f"Metrics for {"Ensemble Model"}")  }})
+            return JsonResponse({
+    "models": model_results,
+    "ensemble": {
+        "table": ensemble_results,
+        "metrics": ensemble_metrics,
+        "chart": generate_bar_chart(ensemble_metrics, f"Metrics for Ensemble Model")
+    }
+})
+
         except Exception as e:
             print(f"Bulk Classification Error: {e}")
             return JsonResponse({'error': str(e)}, status=500)
