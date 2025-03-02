@@ -25,9 +25,7 @@ SECRET_KEY = 'django-insecure-)_2u4h1-60y(r(y87d2vn@+msj5&qbrzcc9^l_k-7b223w)$lk
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    "*",
-]
+ALLOWED_HOSTS = ["railback-production.up.railway.app", "0.0.0.0"]
 
 CORS_ALLOWED_ORIGINS = [
     "https://unique-blancmange-44c8f0.netlify.app",
