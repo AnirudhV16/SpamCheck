@@ -66,3 +66,4 @@ urllib3==2.3.0
 uvicorn==0.34.0
 websockets==15.0
 gunicorn
+whitenoise==6.9.0
