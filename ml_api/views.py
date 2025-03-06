@@ -11,7 +11,7 @@ from django.http import JsonResponse
 
 client1 = Client("AavV4/BiLSTMmodel")
 client2 = Client("AavV4/RLmodel")
-client3 = Client("AavV4/PULearningmodel",timeout=60.0)
+client3 = Client("AavV4/PULearningmodel")
 client4 = client = Client("AavV4/GANBERTmodel")
 
 def classify_with_bilstm(text,client):
@@ -32,7 +32,7 @@ def classify_with_rl(text,client):
 def classify_with_pu(text,client):
     result = client.predict(
             text=text,
-            api_name="/predict")
+            api_name="/predict", timeout=60.0)
     return result.get("probability")
 
 def classify_with_GAN(text,client):
