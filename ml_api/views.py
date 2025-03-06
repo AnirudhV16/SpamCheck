@@ -32,7 +32,7 @@ def classify_with_rl(text,client):
 def classify_with_pu(text,client):
     result = client.predict(
             text=text,
-            api_name="/predict", timeout=60.0)
+            api_name="/predict")
     return result.get("probability")
 
 def classify_with_GAN(text,client):
