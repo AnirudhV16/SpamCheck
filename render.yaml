@@ -1,8 +1,0 @@
-# @format
-
-services:
-  - name: django-backend
-    type: web
-    env: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn project2.wsgi --bind 0.0.0.0:$PORT
