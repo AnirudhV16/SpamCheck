@@ -11,7 +11,7 @@ from django.http import JsonResponse
 
 client1 = Client("AavV4/BiLSTMmodel")
 client2 = Client("AavV4/RLmodel")
-client3 = Client("AavV4/PULearningmodel")
+client3 = Client("AavV4/PULearningmodel",timeout=60.0)
 client4 = client = Client("AavV4/GANBERTmodel")
 
 def classify_with_bilstm(text,client):
