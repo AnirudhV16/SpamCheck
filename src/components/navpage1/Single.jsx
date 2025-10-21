@@ -1,5 +1,6 @@
 /** @format */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Client } from "@gradio/client";
 import "./Single.css";
 
 const Single = () => {
@@ -8,6 +9,18 @@ const Single = () => {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
   const [error, setError] = useState(null);
+  
+  // Initialize the Gradio client
+  const [client, setClient] = useState(null);
+
+  useEffect(() => {
+    const initializeClient = async () => {
+      const gradioClient = await Client.connect("AavV4/Spam_Detection");
+      setClient(gradioClient);
+    };
+
+    initializeClient();
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -23,57 +36,23 @@ const Single = () => {
 
     try {
       // Call Gradio's classify_single_text function
-      const response = await fetch(
-        "https://aavv4-spam-detection-ensemble.hf.space/call/classify_single_text",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            data: [text, modelSelect]
-          })
-        }
-      );
+      const result = await client.predict("/classify_single_text", {
+        text: text,
+        model_select: modelSelect,
+      });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
+      // Assuming the result structure is similar to the previous fetch response
+      const [prediction, probability] = result.data;
 
-      const data = await response.json();
-      const eventId = data.event_id;
-
-      // Poll for the result
-      const eventSource = new EventSource(
-        `https://aavv4-spam-detection-ensemble.hf.space/call/classify_single_text/${eventId}`
-      );
-
-      eventSource.onmessage = (event) => {
-        const parsedData = JSON.parse(event.data);
-        
-        if (parsedData.msg === "process_completed") {
-          const [prediction, probability] = parsedData.output.data;
-          
-          setResult({
-            prediction: prediction,
-            probability: `${probability}%`
-          });
-          
-          eventSource.close();
-          setLoading(false);
-        }
-      };
-
-      eventSource.onerror = (err) => {
-        console.error("EventSource error:", err);
-        setError("Error receiving results from server");
-        eventSource.close();
-        setLoading(false);
-      };
-
+      setResult({
+        prediction: prediction,
+        probability: `${probability}%`
+      });
+      
     } catch (err) {
       console.error("Error:", err);
       setError(err.message || "An error occurred while processing your request");
+    } finally {
       setLoading(false);
     }
   };
