@@ -26,7 +26,7 @@ const Bulkk = () => {
     try {
       setError(null);
       const response = await axios.post(
-        "https://huggingface.co/spaces/AavV4/Spam_Detection_API/ml_api/bulkclassify/",
+        "https://aavv4-spam_detection_api.hf.space/ml_api/bulkclassify/",
         formData,
         {
           headers: {
