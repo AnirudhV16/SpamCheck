@@ -9,7 +9,6 @@ body {
 
 .bulk-container {
     max-width: 55%;
-    /* Adjusted to take 80% of the page */
     margin: 50px auto;
     padding: 55px;
     background: white;
@@ -122,7 +121,6 @@ select:focus {
     border: 1px solid #b2e0f5;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     animation: slideInFromLeft 0.6s ease;
-    /* Updated animation */
 }
 
 .metrics p {
@@ -150,12 +148,101 @@ select:focus {
 .chart img:hover {
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
     border-color: #007bff;
-    /* Optional: Add border-color hover effect */
 }
 
-/* Updated Animations */
+.loading {
+    text-align: center;
+    padding: 30px;
+    margin: 20px 0;
+    background-color: #e3f2fd;
+    border-radius: 8px;
+    color: #1976d2;
+    font-weight: bold;
+}
 
-/* Slide-in animation for metrics */
+.loading p {
+    margin: 0;
+    font-size: 16px;
+}
+
+.table-container {
+    overflow-x: auto;
+    margin: 20px 0;
+}
+
+.table-container table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.table-container th,
+.table-container td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.table-container th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+    color: #333;
+}
+
+.table-container tr:hover {
+    background-color: #f9f9f9;
+}
+
+.results-section {
+    margin: 30px 0;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.results-section h3 {
+    margin-top: 0;
+    color: #343a40;
+}
+
+.charts-section {
+    margin: 30px 0;
+}
+
+.chart-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.chart {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.chart h4 {
+    margin-top: 0;
+    color: #343a40;
+    text-align: center;
+}
+
+.ensemble-chart {
+    grid-column: 1 / -1;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+form small {
+    display: block;
+    margin-top: 5px;
+    color: #666;
+    font-size: 13px;
+}
+
 @keyframes slideInFromLeft {
     from {
         transform: translateX(-50px);
@@ -168,7 +255,6 @@ select:focus {
     }
 }
 
-/* Fade-in with scale for chart */
 @keyframes fadeInWithScale {
     from {
         transform: scale(0.8);
