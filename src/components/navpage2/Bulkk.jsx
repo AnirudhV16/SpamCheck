@@ -1,5 +1,6 @@
 /** @format */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Client } from "@gradio/client";
 import "./Bulkk.css";
 
 const Bulkk = () => {
@@ -10,6 +11,18 @@ const Bulkk = () => {
   const [ensembleResults, setEnsembleResults] = useState(null);
   const [charts, setCharts] = useState({});
   const [error, setError] = useState(null);
+  
+  // Initialize the Gradio client
+  const [client, setClient] = useState(null);
+
+  useEffect(() => {
+    const initializeClient = async () => {
+      const gradioClient = await Client.connect("AavV4/Spam_Detection");
+      setClient(gradioClient);
+    };
+
+    initializeClient();
+  }, []);
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -32,85 +45,47 @@ const Bulkk = () => {
     setCharts({});
 
     try {
-      // Read file as base64
+      // Read file as a Blob
       const reader = new FileReader();
       
       reader.onload = async (event) => {
         const fileData = event.target.result;
-        
+
         try {
           // Call Gradio's bulk_classify_file function
-          const response = await fetch(
-            "https://aavv4-spam-detection-ensemble.hf.space/call/bulk_classify_file",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                data: [{ 
-                  name: file.name,
-                  data: fileData 
-                }]
-              })
-            }
-          );
+          const result = await client.predict("/bulk_classify_file", {
+            file: new Blob([fileData], { type: "text/csv" }), // Ensure the Blob is of type CSV
+          });
 
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
+          // Assuming the result structure is similar to the previous fetch response
+          const output = result.data;
 
-          const data = await response.json();
-          const eventId = data.event_id;
+          // Extract results from the output array
+          // [summary, combined_df, ensemble_df, chart1, chart2, chart3, chart4, ensemble_chart]
+          const [
+            summaryText,
+            combinedData,
+            ensembleData,
+            bilstmChart,
+            rlChart,
+            puChart,
+            ganChart,
+            ensembleChart
+          ] = output;
 
-          // Poll for the result using EventSource
-          const eventSource = new EventSource(
-            `https://aavv4-spam-detection-ensemble.hf.space/call/bulk_classify_file/${eventId}`
-          );
+          setSummary(summaryText);
+          setCombinedResults(combinedData);
+          setEnsembleResults(ensembleData);
+          
+          setCharts({
+            bilstm: bilstmChart?.url || bilstmChart,
+            rl: rlChart?.url || rlChart,
+            pu: puChart?.url || puChart,
+            gan: ganChart?.url || ganChart,
+            ensemble: ensembleChart?.url || ensembleChart
+          });
 
-          eventSource.onmessage = (event) => {
-            const parsedData = JSON.parse(event.data);
-            
-            if (parsedData.msg === "process_completed") {
-              const output = parsedData.output.data;
-              
-              // Extract results from the output array
-              // [summary, combined_df, ensemble_df, chart1, chart2, chart3, chart4, ensemble_chart]
-              const [
-                summaryText,
-                combinedData,
-                ensembleData,
-                bilstmChart,
-                rlChart,
-                puChart,
-                ganChart,
-                ensembleChart
-              ] = output;
-
-              setSummary(summaryText);
-              setCombinedResults(combinedData);
-              setEnsembleResults(ensembleData);
-              
-              setCharts({
-                bilstm: bilstmChart?.url || bilstmChart,
-                rl: rlChart?.url || rlChart,
-                pu: puChart?.url || puChart,
-                gan: ganChart?.url || ganChart,
-                ensemble: ensembleChart?.url || ensembleChart
-              });
-              
-              eventSource.close();
-              setLoading(false);
-            }
-          };
-
-          eventSource.onerror = (err) => {
-            console.error("EventSource error:", err);
-            setError("Error receiving results from server");
-            eventSource.close();
-            setLoading(false);
-          };
-
+          setLoading(false);
         } catch (err) {
           console.error("Processing error:", err);
           setError(err.message || "Error processing the file");
@@ -123,7 +98,7 @@ const Bulkk = () => {
         setLoading(false);
       };
 
-      reader.readAsDataURL(file);
+      reader.readAsArrayBuffer(file); // Read as ArrayBuffer for Blob creation
 
     } catch (err) {
       console.error("Error:", err);
