@@ -17,7 +17,7 @@ const Single = () => {
 
     try {
       const response = await fetch(
-        "https://railback-1.onrender.com/ml_api/classify/",
+        "https://huggingface.co/spaces/AavV4/Spam_Detection_API/ml_api/classify/",
         {
           method: "POST",
           headers: {
