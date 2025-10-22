@@ -92,7 +92,7 @@ def classify_with_bilstm(text, client):
 
 ---
 
-### 2. Reinforcement Learning Model (LightRoBERTa + PPO)
+### 2. Reinforcement Learning Model (LightRoBERTa + PPO) semi-dynamic
 **Hugging Face Space**: [AavV4/RLmodel](https://huggingface.co/spaces/AavV4/RLmodel)
 
 
@@ -100,7 +100,7 @@ def classify_with_bilstm(text, client):
 - LightRoBERTa embeddings
 - Actor-Critic network
 - PPO (Proximal Policy Optimization) agent
-- Dynamic learning from rewards
+- semi - Dynamic learning from rewards
 
 **Purpose**: Adapts to evolving spam patterns
 
@@ -520,3 +520,4 @@ if __name__ == "__main__":
     )
 ```
 ---
+
