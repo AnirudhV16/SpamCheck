@@ -1,0 +1,269 @@
+.page {
+    min-height: calc(100vh - 80px);
+    padding: 3rem 2rem;
+}
+
+.title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #ffffff, var(--primary-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 3rem;
+    letter-spacing: 1px;
+}
+
+.container {
+    max-width: 700px;
+    margin: 0 auto;
+    background: rgba(30, 41, 59, 0.6);
+    backdrop-filter: blur(10px);
+    padding: 3rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+label {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.5px;
+}
+
+.input,
+.select {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    background: rgba(51, 65, 85, 0.5);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--text-primary);
+    outline: none;
+    transition: all 0.3s ease;
+    margin-bottom: 1.5rem;
+}
+
+.input::placeholder {
+    color: var(--text-muted);
+}
+
+.input:focus,
+.select:focus {
+    border-color: var(--primary);
+    background: rgba(51, 65, 85, 0.8);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.button {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+}
+
+.button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(99, 102, 241, 0.5);
+}
+
+.button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.loading {
+    text-align: center;
+    padding: 2rem;
+    margin-top: 1.5rem;
+    background: rgba(6, 182, 212, 0.1);
+    border: 1px solid rgba(6, 182, 212, 0.3);
+    border-radius: 12px;
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.result {
+    margin-top: 2rem;
+    padding: 2rem;
+    border-radius: 12px;
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    text-align: center;
+    font-size: 1.1rem;
+    animation: slideUp 0.5s ease;
+}
+
+.result.error {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: rgba(239, 68, 68, 0.3);
+    color: var(--danger);
+}
+
+.examples-section {
+    margin-bottom: 2rem;
+}
+
+.example-buttons {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 0.75rem;
+}
+
+.example-button {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    background: rgba(99, 102, 241, 0.15);
+    color: #818cf8;
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.example-button:hover {
+    background: rgba(99, 102, 241, 0.25);
+    border-color: rgba(99, 102, 241, 0.5);
+    transform: translateY(-1px);
+}
+
+.textarea {
+    min-height: 120px;
+    resize: vertical;
+    font-family: inherit;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .page {
+        padding: 2rem 1.5rem;
+        min-height: calc(100vh - 120px);
+    }
+    
+    .title {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+    
+    .container {
+        padding: 2rem 1.5rem;
+        border-radius: 16px;
+    }
+    
+    label {
+        font-size: 0.9rem;
+    }
+    
+    .input,
+    .select {
+        padding: 0.875rem;
+        font-size: 0.95rem;
+        margin-bottom: 1.25rem;
+    }
+    
+    .button {
+        padding: 0.875rem;
+        font-size: 1rem;
+    }
+    
+    .result {
+        padding: 1.5rem;
+        font-size: 1rem;
+    }
+    
+    .example-button {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .page {
+        padding: 1.5rem 1rem;
+        min-height: calc(100vh - 140px);
+    }
+    
+    .title {
+        font-size: 1.75rem;
+        margin-bottom: 1.5rem;
+        letter-spacing: 0.5px;
+    }
+    
+    .container {
+        padding: 1.5rem 1rem;
+        border-radius: 12px;
+    }
+    
+    label {
+        font-size: 0.875rem;
+        margin-bottom: 0.4rem;
+    }
+    
+    .input,
+    .select {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+        border-radius: 10px;
+    }
+    
+    .button {
+        padding: 0.75rem;
+        font-size: 0.95rem;
+        letter-spacing: 0.5px;
+    }
+    
+    .loading {
+        padding: 1.5rem;
+        font-size: 0.9rem;
+    }
+    
+    .result {
+        padding: 1.25rem;
+        font-size: 0.95rem;
+        margin-top: 1.5rem;
+    }
+    
+    .example-buttons {
+        gap: 0.5rem;
+    }
+    
+    .example-button {
+        padding: 0.5rem 0.875rem;
+        font-size: 0.8rem;
+        flex: 1 1 auto;
+        min-width: calc(50% - 0.25rem);
+    }
+    
+    .textarea {
+        min-height: 100px;
+    }
+}
