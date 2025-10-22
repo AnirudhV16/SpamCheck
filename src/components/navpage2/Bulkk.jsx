@@ -19,7 +19,7 @@ const Bulkk = () => {
         owner: "AnirudhV16",
         repo: "csv_files",
         branch: "main",
-        token: "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",
+        token: "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",
         uploadPath: "uploads/"
     };
 
