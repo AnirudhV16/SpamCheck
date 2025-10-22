@@ -1,160 +1,117 @@
-/*.page {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 40px;
-    background-color: #f4f7fc;
-    min-height: 80vh;
-    color: #212529;
-}*/
+
+.page {
+    min-height: calc(100vh - 80px);
+    padding: 3rem 2rem;
+}
 
 .title {
     text-align: center;
-    color: #343a40;
-    margin-bottom: 30px;
-    font-size: 32px;
-    /* Increased font size */
-    font-weight: bolder;
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #ffffff, var(--primary-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 3rem;
+    letter-spacing: 1px;
 }
 
 .container {
-    max-width: 55%;
-    /* Adjusted for a slightly narrower container */
-    margin: 50px auto;
-    background: white;
-    padding: 55px;
-    /* Increased padding for more breathing space */
-    border-radius: 12px;
-    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15);
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.container:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
+    max-width: 700px;
+    margin: 0 auto;
+    background: rgba(30, 41, 59, 0.6);
+    backdrop-filter: blur(10px);
+    padding: 3rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
 }
 
 label {
-    font-size: 15px;
-    margin-top: 15px;
-    font-weight: bold;
-    color: #495057;
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.5px;
 }
 
-.input{
-    padding: 14px;
-    /* Increased padding for better usability */
-    width: 95%;
-    margin-top: 10px;
-    margin-bottom: 20px;
-    /* More spacing between elements */
-    font-size: 15px;
-    /* Larger text for better readability */
-    border: 1px solid #d1d9e6;
-    border-radius: 8px;
-    outline: none;
-    transition: all 0.3s ease;
-    background-color: #f8f9fc;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
-}
-.select{
-    padding: 14px;
-    /* Increased padding for better usability */
+.input,
+.select {
     width: 100%;
-    margin-top: 10px;
-    /* More spacing between elements */
-    font-size: 15px;
-    /* Larger text for better readability */
-    border: 1px solid #d1d9e6;
-    border-radius: 8px;
+    padding: 1rem;
+    font-size: 1rem;
+    background: rgba(51, 65, 85, 0.5);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--text-primary);
     outline: none;
     transition: all 0.3s ease;
-    background-color: #f8f9fc;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+    margin-bottom: 1.5rem;
 }
+
+.input::placeholder {
+    color: var(--text-muted);
+}
+
 .input:focus,
-.select:focus,
-input[type="file"]:focus {
-    border-color: #0056b3;
-    background-color: white;
-    box-shadow: 0 0 5px rgba(0, 91, 187, 0.3);
+.select:focus {
+    border-color: var(--primary);
+    background: rgba(51, 65, 85, 0.8);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
 }
 
 .button {
     width: 100%;
-    /* Consistent width with input boxes */
-    padding: 14px;
-    /* Slightly increased padding */
-    margin-top: 20px;
-    /* Added more spacing before the button */
-    background-color: #007bff;
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
     color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: 12px;
     cursor: pointer;
-    font-size: 17px;
-    /* Slightly larger button text */
-    font-weight: bold;
+    transition: all 0.3s ease;
     text-transform: uppercase;
-    transition: background-color 0.3s ease, transform 0.2s;
+    letter-spacing: 1px;
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
 }
 
 .button:hover {
-    background-color: #0056b3;
     transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(99, 102, 241, 0.5);
+}
+
+.button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
 }
 
 .loading {
     text-align: center;
-    margin-top: 20px;
-    font-size: 16px;
-    /* Increased font size for readability */
-    font-weight: bold;
-    color: #007bff;
-    animation: fadeIn 0.5s ease-in-out;
+    padding: 2rem;
+    margin-top: 1.5rem;
+    background: rgba(6, 182, 212, 0.1);
+    border: 1px solid rgba(6, 182, 212, 0.3);
+    border-radius: 12px;
+    color: var(--accent);
+    font-weight: 600;
 }
 
 .result {
-    margin-top: 25px;
-    /* Slightly more margin above results */
-    padding: 25px;
-    /* Added more padding for a balanced look */
+    margin-top: 2rem;
+    padding: 2rem;
     border-radius: 12px;
-    background-color: #eaf7ff;
-    color: #0056b3;
-    border: 1px solid #b2e0f5;
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.3);
     text-align: center;
-    font-size: 16px;
-    /* Larger result text */
-    font-weight: bold;
-    animation: slideInFromBottom 0.6s ease;
+    font-size: 1.1rem;
+    animation: slideUp 0.5s ease;
 }
 
 .result.error {
-    color: red;
-    border-color: red;
-    background-color: #fdecea;
-    animation: fadeIn 0.5s ease-in-out;
-}
-
-/* Animations */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes slideInFromBottom {
-    from {
-        transform: translateY(20px);
-        opacity: 0;
-    }
-
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
+    background: rgba(239, 68, 68, 0.1);
+    border-color: rgba(239, 68, 68, 0.3);
+    color: var(--danger);
 }
