@@ -9,9 +9,14 @@ const Single = () => {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
   const [error, setError] = useState(null);
-  
-  // Initialize the Gradio client
   const [client, setClient] = useState(null);
+
+  // Example messages
+  const examples = [
+    "Hey, I reached safely. Traffic was heavy but managed to get here on time. Let's meet tomorrow if you're free?",
+    "Congratulations! You've been chosen for a free ₹2000 shopping voucher. Click http://rewardzmall.in to claim now!",
+    "Dear Customer, as a valued member of our loyalty program, you have been pre-approved for a personal loan of up to ₹5,00,000 with zero processing fee and flexible EMI options. This offer is valid only till midnight! To apply, click http://instantloansecure.in or call 1800-999-4321. T&C apply."
+  ];
 
   useEffect(() => {
     const initializeClient = async () => {
@@ -21,6 +26,12 @@ const Single = () => {
 
     initializeClient();
   }, []);
+
+  const handleExampleClick = (exampleText) => {
+    setText(exampleText);
+    setResult(null);
+    setError(null);
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -35,13 +46,11 @@ const Single = () => {
     setError(null);
 
     try {
-      // Call Gradio's classify_single_text function
       const result = await client.predict("/classify_single_text", {
         text: text,
         model_select: modelSelect,
       });
 
-      // Assuming the result structure is similar to the previous fetch response
       const [prediction, probability] = result.data;
 
       setResult({
@@ -61,16 +70,33 @@ const Single = () => {
     <div className="page">
       <h1 className="title">SPAM DETECTION TOOL</h1>
       <div className="container">
+        {/* Example Buttons */}
+        <div className="examples-section">
+          <label>Try Examples:</label>
+          <div className="example-buttons">
+            {examples.map((example, index) => (
+              <button
+                key={index}
+                type="button"
+                onClick={() => handleExampleClick(example)}
+                className="example-button"
+              >
+                Example {index + 1}
+              </button>
+            ))}
+          </div>
+        </div>
+
         <form onSubmit={handleSubmit}>
           <label htmlFor="inputText">Enter Text:</label>
-          <input
-            className="input"
-            type="text"
+          <textarea
+            className="input textarea"
             id="inputText"
             value={text}
             onChange={(e) => setText(e.target.value)}
             placeholder="Type your message here..."
             required
+            rows="5"
           />
 
           <label htmlFor="modelSelect">Select ML Model:</label>
