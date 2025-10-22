@@ -6,7 +6,6 @@ import Home from "./components/home/Home";
 import Navbar from "./components/navbar/Navbar";
 import Single from "./components/navpage1/Single";
 import Bulkk from "./components/navpage2/Bulkk";
-//import Models from "./components/navpage3/Models";
 
 function App() {
   return (
