@@ -14,8 +14,8 @@ const Bulkk = () => {
     const [client, setClient] = useState(null);
     const [githubUrl, setGithubUrl] = useState(null);
 
-    const part1 = "github_pat_11AXTNHLA09bBf4DMiAdis";
-    const part2 = "_yqjZwRHc9ZMHQi11JNLJpBVddhjA1pVDzVRsoScScliPDPZKMGO20eGfzQp";
+    const part1 = "giFiQW";
+    const part2 = "_wkP4EwvpQdCdLd9lOZa8";
 
     // GitHub Configuration
     const GITHUB_CONFIG = {
@@ -42,17 +42,14 @@ const Bulkk = () => {
 
     const handleFileChange = (e) => {
         const selectedFile = e.target.files[0];
-        
         if (!selectedFile) {
             setError("No file selected");
             return;
         }
-        
         if (!selectedFile.name.toLowerCase().endsWith('.csv')) {
             setError("Please upload a CSV file");
             return;
         }
-        
         setFile(selectedFile);
         setError(null);
         setGithubUrl(null);
@@ -66,7 +63,6 @@ const Bulkk = () => {
     const checkFileExists = async (filename) => {
         try {
             const apiUrl = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${filename}`;
-            
             const response = await fetch(apiUrl, {
                 method: 'GET',
                 headers: {
@@ -74,12 +70,10 @@ const Bulkk = () => {
                     'Accept': 'application/vnd.github.v3+json',
                 }
             });
-
             if (response.ok) {
                 const data = await response.json();
                 return { exists: true, sha: data.sha };
             }
-            
             return { exists: false, sha: null };
         } catch (err) {
             console.log("File doesn't exist or error checking:", err);
@@ -89,7 +83,6 @@ const Bulkk = () => {
 
     const uploadToGitHub = async (file) => {
         setUploadingToGithub(true);
-        
         try {
             const fileContent = await new Promise((resolve, reject) => {
                 const reader = new FileReader();
@@ -102,24 +95,15 @@ const Bulkk = () => {
             });
 
             const filename = `${GITHUB_CONFIG.uploadPath}${file.name}`;
-
             console.log("Checking if file exists:", filename);
             const { exists, sha } = await checkFileExists(filename);
-
             const apiUrl = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${filename}`;
-
             const requestBody = {
                 message: exists ? `Update ${file.name}` : `Upload ${file.name}`,
                 content: fileContent,
                 branch: GITHUB_CONFIG.branch
             };
-
-            if (exists) {
-                console.log("File exists, replacing...");
-                requestBody.sha = sha;
-            } else {
-                console.log("New file, creating...");
-            }
+            if (exists) requestBody.sha = sha;
 
             const response = await fetch(apiUrl, {
                 method: 'PUT',
@@ -136,12 +120,9 @@ const Bulkk = () => {
             }
 
             const rawUrl = `https://raw.githubusercontent.com/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/${GITHUB_CONFIG.branch}/${filename}`;
-            
             console.log(exists ? "✅ File replaced on GitHub:" : "✅ File uploaded to GitHub:", rawUrl);
             setGithubUrl(rawUrl);
-            
             return rawUrl;
-            
         } catch (err) {
             console.error("❌ GitHub upload error:", err);
             throw new Error(`Failed to upload to GitHub: ${err.message}`);
@@ -154,7 +135,7 @@ const Bulkk = () => {
         e.preventDefault();
 
         if (!file) {
-            setError("Please select a CSV file");
+            setError("Please select a CSV file or try an example");
             return;
         }
 
@@ -173,8 +154,17 @@ const Bulkk = () => {
         try {
             console.log("Starting process...");
             
-            console.log("Uploading file to GitHub...");
-            const rawUrl = await uploadToGitHub(file);
+            let rawUrl;
+            
+            // Check if it's an example file (just has name property) or a real File object
+            if (file instanceof File) {
+                console.log("Uploading file to GitHub...");
+                rawUrl = await uploadToGitHub(file);
+            } else {
+                // It's an example file, use the already set githubUrl
+                rawUrl = githubUrl;
+                console.log("Using example file from:", rawUrl);
+            }
             
             console.log("Processing CSV from:", rawUrl);
             const fileHandle = await handle_file(rawUrl);
@@ -209,13 +199,6 @@ const Bulkk = () => {
             });
 
             console.log("✅ Classification completed successfully!");
-            console.log("📊 Charts received:", {
-                bilstm: bilstmChart,
-                rl: rlChart,
-                pu: puChart,
-                gan: ganChart,
-                ensemble: ensembleChart
-            });
 
         } catch (err) {
             console.error("❌ Error:", err);
@@ -226,26 +209,18 @@ const Bulkk = () => {
     };
 
     const renderDataFrame = (data) => {
-        if (!data || !data.headers || !data.data) {
-            return <p>No data available</p>;
-        }
+        if (!data || !data.headers || !data.data) return <p>No data available</p>;
 
         return (
             <div className="table-container">
                 <table>
                     <thead>
-                        <tr>
-                            {data.headers.map((header, idx) => (
-                                <th key={idx}>{header}</th>
-                            ))}
-                        </tr>
+                        <tr>{data.headers.map((header, idx) => <th key={idx}>{header}</th>)}</tr>
                     </thead>
                     <tbody>
                         {data.data.map((row, rowIdx) => (
                             <tr key={rowIdx}>
-                                {row.map((cell, cellIdx) => (
-                                    <td key={cellIdx}>{cell !== null && cell !== undefined ? cell : 'N/A'}</td>
-                                ))}
+                                {row.map((cell, cellIdx) => <td key={cellIdx}>{cell !== null && cell !== undefined ? cell : 'N/A'}</td>)}
                             </tr>
                         ))}
                     </tbody>
@@ -273,6 +248,35 @@ const Bulkk = () => {
                         {file && <small style={{ color: '#10b981', display: 'block', marginTop: '5px' }}>✓ Selected: {file.name}</small>}
                         {githubUrl && <small style={{ color: '#06b6d4', display: 'block', marginTop: '5px' }}>✓ Uploaded to: {githubUrl}</small>}
                     </div>
+
+                    {/* Example Buttons for Bulk */}
+                    <div className="examples-section" style={{ marginTop: '1.5rem' }}>
+                        <label>Try Example Files:</label>
+                        <div className="example-buttons">
+                            {['test11.csv', 'test22.csv', 'test33.csv'].map((filename, index) => (
+                                <button
+                                    key={index}
+                                    type="button"
+                                    onClick={async () => {
+                                        setError(null);
+                                        setGithubUrl(null);
+                                        setSummary(null);
+                                        setCombinedResults(null);
+                                        setEnsembleResults(null);
+                                        setCharts({});
+                                        
+                                        const exampleUrl = `https://raw.githubusercontent.com/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/${GITHUB_CONFIG.branch}/${GITHUB_CONFIG.uploadPath}${filename}`;
+                                        setGithubUrl(exampleUrl);
+                                        setFile({ name: filename });
+                                    }}
+                                    className="example-button"
+                                >
+                                    Example {index + 1}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+
                     <button type="submit" className="submit-btn" disabled={loading || !client}>
                         {uploadingToGithub 
                             ? "Uploading to GitHub..." 
@@ -316,7 +320,6 @@ const Bulkk = () => {
                 {Object.keys(charts).length > 0 && Object.values(charts).some(chart => chart) && (
                     <div className="charts-section">
                         <h3>📈 Performance Metrics</h3>
-                        
                         <div className="chart-grid">
                             {charts.bilstm && (
                                 <div className="chart">
@@ -324,28 +327,24 @@ const Bulkk = () => {
                                     <img src={charts.bilstm} alt="BiLSTM Metrics" />
                                 </div>
                             )}
-                            
                             {charts.rl && (
                                 <div className="chart">
                                     <h4>Reinforcement Learning Metrics</h4>
                                     <img src={charts.rl} alt="RL Metrics" />
                                 </div>
                             )}
-                            
                             {charts.pu && (
                                 <div className="chart">
                                     <h4>PU Learning Metrics</h4>
                                     <img src={charts.pu} alt="PU Learning Metrics" />
                                 </div>
                             )}
-                            
                             {charts.gan && (
                                 <div className="chart">
                                     <h4>GAN BERT Metrics</h4>
                                     <img src={charts.gan} alt="GAN BERT Metrics" />
                                 </div>
                             )}
-                            
                             {charts.ensemble && (
                                 <div className="chart ensemble-chart">
                                     <h4>Ensemble Model Metrics</h4>
