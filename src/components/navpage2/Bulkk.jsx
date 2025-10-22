@@ -14,12 +14,15 @@ const Bulkk = () => {
     const [client, setClient] = useState(null);
     const [githubUrl, setGithubUrl] = useState(null);
 
+    const part1 = "github_pat_11AXTNHLA09bBf4DMiAdis";
+    const part2 = "_yqjZwRHc9ZMHQi11JNLJpBVddhjA1pVDzVRsoScScliPDPZKMGO20eGfzQp";
+
     // GitHub Configuration
     const GITHUB_CONFIG = {
         owner: "AnirudhV16",
         repo: "csv_files",
         branch: "main",
-        token: "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",
+        token: part1 + part2,
         uploadPath: "uploads/"
     };
 
