@@ -460,54 +460,7 @@ def test_end_to_end():
 # - Easy updates
 ```
 
-### 2. Docker Deployment
-
-```dockerfile
-# Dockerfile
-FROM python:3.8-slim
-
-WORKDIR /app
-
-COPY requirements.txt .
-RUN pip install -r requirements.txt
-
-COPY app.py .
-
-EXPOSE 7860
-
-CMD ["python", "app.py"]
-```
-
-```bash
-# Build and run
-docker build -t spam-detection-backend .
-docker run -p 7860:7860 spam-detection-backend
-```
-
-### 3. AWS Lambda
-
-```python
-# lambda_function.py
-import json
-from gradio_client import Client
-
-def lambda_handler(event, context):
-    client = Client("AavV4/BiLSTMmodel")
-    text = event['text']
-    model = event.get('model', 'Ensemble')
-    
-    result = classify_single_text(text, model)
-    
-    return {
-        'statusCode': 200,
-        'body': json.dumps({
-            'prediction': result[0],
-            'probability': result[1]
-        })
-    }
-```
-
-### 4. Local Server
+### 2. Local Server
 
 ```python
 # For production deployment
@@ -519,5 +472,8 @@ if __name__ == "__main__":
         ssl_verify=False
     )
 ```
+### Explore Additional Deployment Options — AWS, Docker, etc.
+
 ---
+
 
