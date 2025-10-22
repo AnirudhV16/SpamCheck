@@ -1,8 +1,8 @@
 # 🛡️ SpamCheck - Hybrid SMS Spam Detection System
 
-[![Live Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://your-deployment-url.com)
+[![Live Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://unique-blancmange-44c8f0.netlify.app/)
 
-An advanced SMS spam detection system leveraging multiple machine learning approaches including PU Learning, Reinforcement Learning, BiLSTM, and GAN-based models with an ensemble voting mechanism.
+An advanced SMS spam detection system leveraging multiple machine learning approaches including PU Learning, Reinforcement Learning (semi-dynamic), BiLSTM with distilbert, and GAN-based models with an ensemble voting mechanism.
 
 ## Overview
 
@@ -77,38 +77,7 @@ SpamCheck is a comprehensive spam detection solution developed as part of a B.Te
 └───────────────────────────────────────────────────────────┘
 ```
 
-##  Dataset Details
-
-### Training Dataset Statistics
-
-| Metric | Value |
-|--------|-------|
-| **Total Messages** | 67,008 |
-| **Training Set** | 36,648 (54.7%) |
-| **Validation Set** | 5,236 (7.8%) |
-| **Test Set** | 10,472 (15.6%) |
-| **Spam Messages** | 26,178 (39.1%) |
-| **Ham Messages** | 40,830 (60.9%) |
-
-### Dataset Composition
-
-- **Source**: Combined SMS Spam Collection Dataset
-- **Format**: CSV with `message` and `label` columns
-- **Preprocessing**: Text normalization, tokenization, embedding generation
-- **Features**: RoBERTa, DistilBERT, and LightRoBERTa embeddings
-
-### Data Distribution
-
-```
-Class Distribution:
-├── Non-Spam (Ham): 40,830 messages (60.9%)
-└── Spam: 26,178 messages (39.1%)
-
-Dataset Split:
-├── Train: 36,648 messages
-├── Validation: 5,236 messages
-└── Test: 10,472 messages
-```
+---
 
 ## 🎥 Demo Video
 
@@ -123,23 +92,23 @@ Dataset Split:
 ## 📸 Screenshots
 
 ### 1. Homepage
-![Homepage](<img width="1600" height="859" alt="s1" src="https://github.com/user-attachments/assets/cc773abb-2b77-40d5-bdaa-1a1b7487364f" />)
+<img width="1600" height="859" alt="s1" src="https://github.com/user-attachments/assets/cc773abb-2b77-40d5-bdaa-1a1b7487364f" />
 *Landing page with options for single and bulk detection*
 
 ### 2. Single Message Detection
-![Single Detection](<img width="1600" height="860" alt="s2" src="https://github.com/user-attachments/assets/902a72c9-0614-4ea4-8364-1c0d8e9bd962" />)
+<img width="1600" height="860" alt="s2" src="https://github.com/user-attachments/assets/902a72c9-0614-4ea4-8364-1c0d8e9bd962" />
 *Real-time spam classification with model selection*
 
 ### 3. Bulk Processing Interface
-![Bulk Upload](<img width="1600" height="859" alt="s3" src="https://github.com/user-attachments/assets/15cc51cd-a99a-4f20-9060-7784d25a171d" />)
+<img width="1600" height="859" alt="s3" src="https://github.com/user-attachments/assets/15cc51cd-a99a-4f20-9060-7784d25a171d" />
 *CSV file upload for batch processing*
 
 ### 4. Results Dashboard
-![Metrics Visualization](<img width="1600" height="857" alt="s4" src="https://github.com/user-attachments/assets/92e1b2fd-6c41-4c14-8e71-f62f1cc3098d" />)
+<img width="1600" height="857" alt="s4" src="https://github.com/user-attachments/assets/92e1b2fd-6c41-4c14-8e71-f62f1cc3098d" />
 *Comprehensive results table with ensemble predictions*
 
 ### 5. Performance Metrics
-![Results](<img width="1600" height="856" alt="s5" src="https://github.com/user-attachments/assets/6de58229-ce97-4f12-ac1b-69dbc3ef549d" />)
+<img width="1600" height="856" alt="s5" src="https://github.com/user-attachments/assets/6de58229-ce97-4f12-ac1b-69dbc3ef549d" />
 *Detailed performance comparison across all models*
 
 ## Installation
@@ -216,6 +185,40 @@ sms,label
 "Congratulations! You've won $1000. Click here to claim",1
 "Hi, are we still meeting for lunch tomorrow?",0
 "URGENT: Your account has been compromised. Verify now",1
+```
+---
+
+##  Dataset Details
+
+### Training Dataset Statistics
+
+| Metric | Value |
+|--------|-------|
+| **Total Messages** | 67,008 |
+| **Training Set** | 36,648 (54.7%) |
+| **Validation Set** | 5,236 (7.8%) |
+| **Test Set** | 10,472 (15.6%) |
+| **Spam Messages** | 26,178 (39.1%) |
+| **Ham Messages** | 40,830 (60.9%) |
+
+### Dataset Composition
+
+- **Source**: Combined SMS Spam Collection Dataset
+- **Format**: CSV with `message` and `label` columns
+- **Preprocessing**: Text normalization, tokenization, embedding generation
+- **Features**: RoBERTa, DistilBERT, and LightRoBERTa embeddings
+
+### Data Distribution
+
+```
+Class Distribution:
+├── Non-Spam (Ham): 40,830 messages (60.9%)
+└── Spam: 26,178 messages (39.1%)
+
+Dataset Split:
+├── Train: 36,648 messages
+├── Validation: 5,236 messages
+└── Test: 10,472 messages
 ```
 
 ## 📈 Model Performance
