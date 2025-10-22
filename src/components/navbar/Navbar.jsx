@@ -1,13 +1,13 @@
 /** @format */
 
 import React from "react";
-import "./Navbar.css"; // CSS file for styling
+import "./Navbar.css";
 
 const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="logo">
-        <span>SpamDetector</span> {/* Text is now not a link */}
+        <span>SpamDetector</span>
       </div>
       <ul className="navbar-links">
         <li>
