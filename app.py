@@ -2,7 +2,7 @@ import gradio as gr
 import pandas as pd
 import numpy as np
 import matplotlib
-matplotlib.use('Agg')
+matplotlib.use('Agg')  # Use non-interactive backend
 import matplotlib.pyplot as plt
 from gradio_client import Client
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
@@ -134,6 +134,7 @@ def bulk_classify_file(file):
                 "F1 Score": f1_score(true_labels, predictions, zero_division=0) * 100
             }
             
+            # Create results dataframe for this model
             model_df = pd.DataFrame({
                 "SMS": smses,
                 f"{model_name} Probability (%)": [round(p * 100, 2) for p in probs],
