@@ -1,4 +1,4 @@
-# 🛡️ SpamCheck - Hybrid SMS Spam Detection System
+# 🛡️ SpamCheck - Check Texts for Spam
 
 [![Live Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://unique-blancmange-44c8f0.netlify.app/)
 
