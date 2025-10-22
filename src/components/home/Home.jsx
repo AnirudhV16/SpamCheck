@@ -1,7 +1,7 @@
 /** @format */
 
 import React from "react";
-import "./Home.css"; // CSS file for styling
+import "./Home.css";
 
 const Home = () => {
   return (
@@ -9,8 +9,7 @@ const Home = () => {
       <div className="hero-section">
         <h1>SPAM DETECTOR</h1>
         <p>
-          Effortlessly detect and analyze spam messages using our cutting-edge
-          tools.
+          Classify spam with confidence using multiple AI models.
         </p>
         <div className="cta">
           <a href="/single" className="cta-button">
