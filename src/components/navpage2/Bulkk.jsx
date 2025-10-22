@@ -14,8 +14,8 @@ const Bulkk = () => {
     const [client, setClient] = useState(null);
     const [githubUrl, setGithubUrl] = useState(null);
 
-    const part1 = "giFiQW";
-    const part2 = "_wkP4EwvpQdCdLd9lOZa8";
+    const part1 = "github_pat_11AXTNHLA0jcPKXAzAFiQW";
+    const part2 = "_wkP4EwvpQdCdLdilItjvX91HD50B8bTxL39fU0psigp6ZWMNCDACm9lOZa8";
 
     // GitHub Configuration
     const GITHUB_CONFIG = {
